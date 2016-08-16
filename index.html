@@ -267,11 +267,11 @@
             'timeZone': 'Asia/Kolkata'
           },
           'recurrence': [
-            'RRULE:FREQ=DAILY;COUNT=2'
+            'RRULE:FREQ=DAILY;COUNT=1'
           ],
           'attendees': emailsObj,
           'reminders': {
-            'useDefault': false,
+            'useDefault': true,
             'overrides': [
               {'method': 'email', 'minutes': 24 * 60},
               {'method': 'popup', 'minutes': 10}
@@ -289,7 +289,7 @@
 
           $("#createEvent").modal('hide');
           $("#eventSuccess").removeClass("hide").find("a").attr("href", event.htmlLink);
-          
+
           setTimeout(function(){
 
             $("#eventSuccess").addClass("hide")
