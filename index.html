@@ -138,7 +138,7 @@
           right: 'month,agendaWeek,agendaDay'
         },
         selectable: true,
-        selectHelper: true,
+        selectHelper: false,
         editable: true,
         defaultView: 'agendaDay',
         eventLimit: true,
@@ -289,6 +289,7 @@
 
           $("#createEvent").modal('hide');
           $("#eventSuccess").removeClass("hide").find("a").attr("href", event.htmlLink);
+          
           setTimeout(function(){
 
             $("#eventSuccess").addClass("hide")
