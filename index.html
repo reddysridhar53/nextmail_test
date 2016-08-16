@@ -271,26 +271,43 @@
           ],
           'attendees': emailsObj,
           'reminders': {
-            'useDefault': true,
+            "useDefault": false,
+            "overrides": [
+              {
+                "method": "email",
+                "minutes": 15
+              },
+              {
+                "method": "popup",
+                "minutes": 15
+              }
+            ]
           }
         };
 
-        var request = gapi.client.calendar.events.insert({
-
+        var request = gapi.client.calendar.events.insert(
+          "sendNotifications": true,
+        {
           'calendarId': 'primary',
           'resource': event
         });
 
         request.execute(function(event) {
 
-          $("#createEvent").modal('hide');
-          $("#eventSuccess").removeClass("hide").find("a").attr("href", event.htmlLink);
+          if(event.status == "confirmed"){
 
-          setTimeout(function(){
+            $("#createEvent").modal('hide');
+            $("#eventSuccess").removeClass("hide").find("a").attr("href", event.htmlLink);
 
-            $("#eventSuccess").addClass("hide")
-            $(".fullcalendar").fullCalendar( 'refetchEvents' )
-          }, 5000)
+            setTimeout(function(){
+
+              $("#eventSuccess").addClass("hide")
+              $(".fullcalendar").fullCalendar( 'refetchEvents' )
+            }, 5000)
+          }else{
+
+            alert("Something went wrong...Please try again later")
+          }
         });
       })
 
